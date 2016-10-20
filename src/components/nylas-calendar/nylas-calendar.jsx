@@ -69,6 +69,11 @@ export default class NylasCalendar extends React.Component {
     onCalendarMouseUp: React.PropTypes.func,
     onCalendarMouseDown: React.PropTypes.func,
     onCalendarMouseMove: React.PropTypes.func,
+
+    onEventClick: React.PropTypes.func,
+    onEventDoubleClick: React.PropTypes.func,
+
+    selectedEvents: React.PropTypes.arrayOf(React.PropTypes.object),
   }
 
   static defaultProps = {
@@ -164,6 +169,9 @@ export default class NylasCalendar extends React.Component {
           onCalendarMouseUp={this.props.onCalendarMouseUp}
           onCalendarMouseDown={this.props.onCalendarMouseDown}
           onCalendarMouseMove={this.props.onCalendarMouseMove}
+          selectedEvents={this.props.selectedEvents}
+          onEventClick={this.props.onEventClick}
+          onEventDoubleClick={this.props.onEventDoubleClick}
         />
       </div>
     )
