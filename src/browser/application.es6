@@ -175,6 +175,7 @@ export default class Application extends EventEmitter {
       this.windowManager.ensureWindow(WindowManager.MAIN_WINDOW);
       this.windowManager.ensureWindow(WindowManager.WORK_WINDOW);
 
+      // Don't forget to remove!
       // TMPE
       this.windowManager.ensureWindow(WindowManager.CALENDAR_WINDOW, {
         windowKey: WindowManager.CALENDAR_WINDOW,
