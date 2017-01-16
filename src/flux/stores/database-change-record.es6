@@ -14,8 +14,16 @@ export default class DatabaseChangeRecord {
     // When DatabaseChangeRecords are sent over IPC to other windows, their object
     // payload is sub-serialized into a JSON string. This means that we can wait
     // to deserialize models until someone in the window asks for `change.objects`
-    this._objects = options.objects;
+    this._objects = options.objects
     this._objectsString = options.objectsString;
+
+    this._objects = this._objects || JSON.parse(this._objectsString, Utils.registeredObjectReviver);
+    if (options.objectClass === "Message") {
+      this._objects = this._objects.map((o) => {
+        o.body = null;
+        return o;
+      })
+    }
 
     Object.defineProperty(this, 'type', {
       get: () => options.type,
@@ -25,7 +33,6 @@ export default class DatabaseChangeRecord {
     })
     Object.defineProperty(this, 'objects', {
       get: () => {
-        this._objects = this._objects || JSON.parse(this._objectsString, Utils.registeredObjectReviver);
         return this._objects;
       },
     })
